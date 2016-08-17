@@ -1,19 +1,21 @@
 buildscript {
-	ext {
-		spring_bootVersion = '1.4.0.RELEASE'
-		spring_frameworkVersion='4.3.2.RELEASE'
-	}
-	repositories {
-		// NOTE: You should declare only repositories that you need here
-		mavenLocal()
-		mavenCentral()
-		maven { url "http://repo.spring.io/release" }
-		maven { url "http://repo.spring.io/milestone" }
-		maven { url "http://repo.spring.io/snapshot" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${spring_bootVersion}")
-	}
+    ext {
+        spring_bootVersion = '1.4.0.RELEASE'
+        spring_frameworkVersion = '4.3.2.RELEASE'
+        hibernate_Version = '5.2.2.Final'
+        mysql_Version = '5.1.8'
+    }
+    repositories {
+        // NOTE: You should declare only repositories that you need here
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${spring_bootVersion}")
+    }
 }
 
 apply plugin: 'java'
@@ -22,39 +24,48 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'eShop'
-	version =  '0.0.0'
+    baseName = 'eShop'
+    version = '0.0.0'
 }
 
 bootRun {
-  systemProperties = System.properties
+    systemProperties = System.properties
 }
 
 repositories {
-	// NOTE: You should declare only repositories that you need here
-	mavenLocal()
-	mavenCentral()
-	maven { url "http://repo.spring.io/release" }
-	maven { url "http://repo.spring.io/milestone" }
-	maven { url "http://repo.spring.io/snapshot" }
+    // NOTE: You should declare only repositories that you need here
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/release" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/snapshot" }
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot:${spring_bootVersion}")
-	compile("org.springframework.boot:spring-boot-starter:${spring_bootVersion}")
-	compile("org.springframework.boot:spring-boot-actuator:${spring_bootVersion}")
-	compile("org.springframework.boot:spring-boot-starter-aop:${spring_bootVersion}")
-	compile("org.springframework.boot:spring-boot-starter-jdbc:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-starter:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-actuator:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-aop:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-jdbc:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${spring_bootVersion}")
 
-	compile("org.springframework:spring-web:${spring_frameworkVersion}")
-	compile("org.springframework:spring-webmvc:${spring_frameworkVersion}")
+    compile("org.springframework:spring-web:${spring_frameworkVersion}")
+    compile("org.springframework:spring-webmvc:${spring_frameworkVersion}")
 
-	compile ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.6")
-	compile ("javax.validation:validation-api:1.1.0.Final")
+    compile("org.hibernate:hibernate-core:${hibernate_Version}")
+    compile("org.hibernate:hibernate-entitymanager:${hibernate_Version}")
+    compile("org.hibernate:hibernate-validator:${hibernate_Version}")
+    compile('org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final')
+    compile("org.hibernate:hibernate-java8:${hibernate_Version}")
+    compile("mysql:mysql-connector-java:${mysql_Version}")
 
-	testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.6")
+    compile("javax.validation:validation-api:1.1.0.Final")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '3.0'
+    gradleVersion = '3.0'
 }

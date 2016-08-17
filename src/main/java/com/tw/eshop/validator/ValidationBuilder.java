@@ -1,6 +1,7 @@
 package com.tw.eshop.validator;
 
 import com.tw.eshop.util.JsonUtility;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -12,6 +13,8 @@ import java.util.Map;
 /**
  * Created by qbhuang on 16/8/17.
  */
+
+@Component
 public class ValidationBuilder {
 
     public String buildErrorMessage(BindingResult bindingResult) {

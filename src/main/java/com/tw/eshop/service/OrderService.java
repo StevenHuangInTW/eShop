@@ -16,17 +16,27 @@
 
 package com.tw.eshop.service;
 
+import com.tw.eshop.dao.OrderRepository;
+import com.tw.eshop.model.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class OrderService {
 
-	@Value("${name:World}")
-	private String name;
+	@Autowired
+	private OrderRepository orderRepository;
 
-	public String getHelloMessage() {
-		return "Hello " + this.name;
+	public void create(Order order) {
+		if (order == null) {
+			throw new RuntimeException("order cannot be null");
+		}
+
+		order.setId(String.valueOf(System.currentTimeMillis()));
+		order.setCreateAt(new Date());
+		orderRepository.save(order);
 	}
-
 }
