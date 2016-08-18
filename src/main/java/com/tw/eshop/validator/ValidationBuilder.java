@@ -1,6 +1,8 @@
 package com.tw.eshop.validator;
 
 import com.tw.eshop.util.JsonUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -16,6 +18,7 @@ import java.util.Map;
 
 @Component
 public class ValidationBuilder {
+    private  Logger logger = LoggerFactory.getLogger(ValidationBuilder.class);
 
     public String buildErrorMessage(BindingResult bindingResult) {
         StringBuilder builder = new StringBuilder();
@@ -28,7 +31,7 @@ public class ValidationBuilder {
                 builder.append(JsonUtility.convertToString(map, Map.class));
                 return builder.toString();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(),e);
             }
         }
         return null;

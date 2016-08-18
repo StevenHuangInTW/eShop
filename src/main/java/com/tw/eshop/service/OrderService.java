@@ -18,6 +18,8 @@ package com.tw.eshop.service;
 
 import com.tw.eshop.dao.OrderRepository;
 import com.tw.eshop.model.Order;
+import com.tw.eshop.validator.Validator;
+import com.tw.eshop.vo.ValidateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -31,19 +33,30 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
+    @Autowired
+    private Validator<Order> orderValidator;
+
+    @Autowired
+    private  Validator<String> notBlankValidator;
+
 	@Transactional
 	public void create(Order order) {
-		if (order == null) {
-			throw new RuntimeException("order cannot be null");
-		}
+        ValidateResult validateResult = orderValidator.validate(order);
+		if(!validateResult.isValid()){
+            throw new RuntimeException(validateResult.getMsg());
+        }
 
-		order.setId(String.valueOf(System.currentTimeMillis()));
-		order.setCreateAt(new Date());
-		orderRepository.save(order);
-	}
+        order.setId(String.valueOf(System.currentTimeMillis()));
+        order.setCreateAt(new Date());
+        orderRepository.save(order);
+    }
 
 	@Transactional
     public void delete(String id) {
-    	orderRepository.delete(id);
+    	ValidateResult validateResult = notBlankValidator.validate(id);
+	    if(!validateResult.isValid()){
+            throw new RuntimeException(validateResult.getMsg());
+        }
+	    orderRepository.delete(id);
     }
 }
