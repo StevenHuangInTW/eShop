@@ -17,6 +17,8 @@
 package com.tw.eshop.service;
 
 import com.tw.eshop.dao.OrderRepository;
+import com.tw.eshop.exception.InvalidDataException;
+import com.tw.eshop.exception.NotExistsOrderException;
 import com.tw.eshop.model.Order;
 import com.tw.eshop.validator.Validator;
 import com.tw.eshop.vo.ValidateResult;
@@ -43,7 +45,7 @@ public class OrderService {
 	public void create(Order order) {
         ValidateResult validateResult = orderValidator.validate(order);
 		if(!validateResult.isValid()){
-            throw new RuntimeException(validateResult.getMsg());
+            throw new InvalidDataException(validateResult.getMsg());
         }
 
         order.setId(String.valueOf(System.currentTimeMillis()));
@@ -55,8 +57,14 @@ public class OrderService {
     public void delete(String id) {
     	ValidateResult validateResult = notBlankValidator.validate(id);
 	    if(!validateResult.isValid()){
-            throw new RuntimeException(validateResult.getMsg());
+            throw new InvalidDataException(validateResult.getMsg());
         }
-	    orderRepository.delete(id);
+
+        Order existsOrder = orderRepository.findOne(id);
+        if(existsOrder == null){
+            throw new NotExistsOrderException("Invalid order id");
+        }
+
+	    orderRepository.delete(existsOrder);
     }
 }

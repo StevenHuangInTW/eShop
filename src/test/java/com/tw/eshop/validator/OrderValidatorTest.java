@@ -72,6 +72,50 @@ public class OrderValidatorTest {
     }
 
     @Test
+    public void shouldFailGivenNegativePrice(){
+        exampleOrder.setPrice(-1d);
+
+        boolean expected = false;
+
+        boolean actual = orderValidator.validate(exampleOrder).isValid();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void shouldFailGivenZeroPrice(){
+        exampleOrder.setPrice(0d);
+
+        boolean expected = false;
+
+        boolean actual = orderValidator.validate(exampleOrder).isValid();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void shouldFailGivenNegativeQty(){
+        exampleOrder.setQty(-1);
+
+        boolean expected = false;
+
+        boolean actual = orderValidator.validate(exampleOrder).isValid();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void shouldFailGivenZeroQty(){
+        exampleOrder.setQty(0);
+
+        boolean expected = false;
+
+        boolean actual = orderValidator.validate(exampleOrder).isValid();
+
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
     public void shouldFailGivenNullQty(){
         exampleOrder.setQty(null);
 

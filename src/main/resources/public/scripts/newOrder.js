@@ -9,18 +9,17 @@ $("form").submit(function(event){
     $.ajax({
         url : url,
         success : function(data) {
-            if (data.requestHandleStatus == false) {
-              alert("创建失败, " + data.message);
+            if (data.message) {
+                alert("Order creation fail, " + data.message);
             } else {
-              alert("成功创建, 订单编号 : " + data.data.id);
+              alert("Order create successful, order no : " + data.data.id);
             }
         },
 
         error : function(data, textStatus, errorThrown) {
-            alert("订单创建错误!");
+            alert("Order creation fail, " + data.responseJSON.message);
         },
         type : "PUT",
-//        contentType : "application/x-www-form-urlencoded; charset=utf-8",
         contentType:"application/json;",
         dataType: "json",
         data : JSON.stringify({

@@ -8,14 +8,14 @@ $("form").submit(function(event){
         url : url + "?orderId=" + orderId,
         success : function(data) {
             if (data.message) {
-              alert("删除失败, " + data.message);
+              alert("Delete Fail, " + data.message);
             } else {
-              alert("成功删除。");
+              alert("Delete Successfully。");
             }
         },
 
         error : function(data, textStatus, errorThrown) {
-            alert("订单删除错误!");
+            alert("Delete Fail, " + data.responseJSON.message);
         },
         type : "DELETE",
     });
