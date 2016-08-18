@@ -30,6 +30,8 @@ public class OrderValidator implements Validator<Order>{
             return new ValidateResult(false, "There is no order price.");
         }
 
+
+
         if(data.getQty() == null){
             return new ValidateResult(false, "There is no order qty.");
         }
