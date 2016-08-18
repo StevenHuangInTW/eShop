@@ -22,10 +22,16 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'war'
 
 jar {
     baseName = 'eShop'
     version = '0.0.0'
+}
+
+war {
+    baseName = 'eShop'
+    version =  '0.0.0'
 }
 
 bootRun {
@@ -49,9 +55,13 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-aop:${spring_bootVersion}")
     compile("org.springframework.boot:spring-boot-starter-jdbc:${spring_bootVersion}")
     compile("org.springframework.boot:spring-boot-starter-data-jpa:${spring_bootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
     compile("org.springframework:spring-web:${spring_frameworkVersion}")
     compile("org.springframework:spring-webmvc:${spring_frameworkVersion}")
+
+
 
     compile("org.hibernate:hibernate-core:${hibernate_Version}")
     compile("org.hibernate:hibernate-entitymanager:${hibernate_Version}")
