@@ -21,6 +21,7 @@ import com.tw.eshop.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -30,6 +31,7 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Transactional
 	public void create(Order order) {
 		if (order == null) {
 			throw new RuntimeException("order cannot be null");
@@ -39,4 +41,9 @@ public class OrderService {
 		order.setCreateAt(new Date());
 		orderRepository.save(order);
 	}
+
+	@Transactional
+    public void delete(String id) {
+    	orderRepository.delete(id);
+    }
 }
