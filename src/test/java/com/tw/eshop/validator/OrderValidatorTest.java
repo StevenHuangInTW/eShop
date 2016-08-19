@@ -29,7 +29,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenNullOrderEntity() throws Exception {
+    public void should_fail_given_null_order_entity() throws Exception {
         boolean expected = false;
 
         boolean actual = orderValidator.validate(null).isValid();
@@ -38,7 +38,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenBlankName(){
+    public void should_fail_given_blank_name(){
         exampleOrder.setName(BLANK_STRING);
 
         boolean expected = false;
@@ -50,7 +50,7 @@ public class OrderValidatorTest {
 
 
     @Test
-    public void shouldFailGivenEmptyName(){
+    public void should_fail_given_empty_name(){
         exampleOrder.setName(EMPTY_STRING);
 
         boolean expected = false;
@@ -61,7 +61,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenNullPrice(){
+    public void should_fail_given_null_price(){
         exampleOrder.setPrice(null);
 
         boolean expected = false;
@@ -72,7 +72,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenNegativePrice(){
+    public void should_fail_given_negative_price(){
         exampleOrder.setPrice(-1d);
 
         boolean expected = false;
@@ -83,7 +83,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenZeroPrice(){
+    public void should_fail_given_zero_price(){
         exampleOrder.setPrice(0d);
 
         boolean expected = false;
@@ -94,7 +94,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenNegativeQty(){
+    public void should_fail_given_negative_qty(){
         exampleOrder.setQty(-1);
 
         boolean expected = false;
@@ -105,7 +105,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenZeroQty(){
+    public void should_fail_given_zero_qty(){
         exampleOrder.setQty(0);
 
         boolean expected = false;
@@ -116,7 +116,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldFailGivenNullQty(){
+    public void should_fail_given_null_qty(){
         exampleOrder.setQty(null);
 
         boolean expected = false;
@@ -127,7 +127,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void shouldSuccessGivenAllFieldsValue(){
+    public void should_success_given_all_fields_value(){
         boolean expected = true;
         boolean actual = orderValidator.validate(exampleOrder).isValid();
 
