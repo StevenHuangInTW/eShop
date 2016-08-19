@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package com.tw.eshop.service;
+package com.tw.eshop.service.impl;
 
 import com.tw.eshop.dao.OrderRepository;
 import com.tw.eshop.exception.InvalidDataException;
 import com.tw.eshop.exception.NotExistsOrderException;
 import com.tw.eshop.model.Order;
+import com.tw.eshop.service.OrderService;
 import com.tw.eshop.validator.Validator;
 import com.tw.eshop.vo.ValidateResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-@Component
-public class OrderService {
+@Service
+public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -41,7 +43,8 @@ public class OrderService {
     @Autowired
     private  Validator<String> notBlankValidator;
 
-	@Transactional
+	@Override
+    @Transactional
 	public void create(Order order) {
         ValidateResult validateResult = orderValidator.validate(order);
 		if(!validateResult.isValid()){
@@ -53,7 +56,8 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-	@Transactional
+	@Override
+    @Transactional
     public void delete(String id) {
     	ValidateResult validateResult = notBlankValidator.validate(id);
 	    if(!validateResult.isValid()){
