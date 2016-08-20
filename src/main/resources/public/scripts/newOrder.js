@@ -19,7 +19,7 @@ $("form").submit(function(event){
         error : function(data, textStatus, errorThrown) {
             alert("Order creation fail, " + data.responseJSON.message);
         },
-        type : "PUT",
+        type : "POST",
         contentType:"application/json;",
         dataType: "json",
         data : JSON.stringify({

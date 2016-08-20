@@ -31,7 +31,7 @@ public class OrderController {
     @Autowired
     private ValidationBuilder validationBuilder;
 
-    @RequestMapping(value = "order", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpResponse> newOrder(@RequestBody @Valid Order orderEntity, BindingResult bindingResult) {
         HttpResponse<Order> result = new HttpResponse<>();
         logger.debug("Attempt to create new order, name = " + orderEntity.getName() + ", price=" + orderEntity.getPrice() + ", qty=" + orderEntity.getQty());
