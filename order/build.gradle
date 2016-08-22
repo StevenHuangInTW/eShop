@@ -1,0 +1,37 @@
+buildscript {
+    ext {
+        spring_bootVersion = '1.4.0.RELEASE'
+        spring_frameworkVersion = '4.3.2.RELEASE'
+        hibernate_Version = '5.2.2.Final'
+        mysql_Version = '5.1.8'
+    }
+    repositories {
+        // NOTE: You should declare only repositories that you need here
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${spring_bootVersion}")
+    }
+}
+
+jar {
+    baseName = 'order'
+    version = '0.0.0'
+}
+
+war {
+    baseName = 'order'
+    version =  '0.0.0'
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.0'
+}
