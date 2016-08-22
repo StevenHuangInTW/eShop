@@ -1,6 +1,8 @@
 package com.tw.eshop.order;
 
-import com.tw.eshop.web.model.Order;
+import com.tw.eshop.order.model.Order;
+import com.tw.eshop.order.validator.OrderValidator;
+import com.tw.eshop.order.validator.Validator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
