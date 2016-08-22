@@ -1,7 +1,7 @@
 $("form").submit(function(event){
     event.preventDefault();
 
-    var url = "http://localhost:8008/order-api/order";
+    var url = "http://localhost:8080/order-api/order";
     var name = $("#txtName").val();
     var price = $("#txtPrice").val();
     var qty = $("#txtQty").val();

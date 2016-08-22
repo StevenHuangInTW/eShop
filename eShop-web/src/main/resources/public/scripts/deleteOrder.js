@@ -3,7 +3,7 @@ $("form").submit(function(event){
 
     var orderId = $("#txtOrderId").val();
     if(confirm("Do want to delete the order of " + orderId)){
-        var url = "http://localhost:8008/order-api  /order";
+        var url = "http://localhost:8080/order-api/order";
 
         $.ajax({
             url : url + "?orderId=" + orderId,
