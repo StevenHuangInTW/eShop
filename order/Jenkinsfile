@@ -8,8 +8,8 @@ node {
               allowMissing: false,
               alwaysLinkToLastBuild: false,
               keepAll: true,
-              reportDir: 'junit',
-              reportFiles: 'reports/tests/test/*',
+              reportDir: 'reports',
+              reportFiles: '*',
               reportName: "Test Report"
             ])
     }
