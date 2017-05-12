@@ -4,5 +4,13 @@ node {
         stage 'Build'
         checkout scm
         sh "gradle clean build"
+        publishHTML (target: [
+              allowMissing: false,
+              alwaysLinkToLastBuild: false,
+              keepAll: true,
+              reportDir: 'junit',
+              reportFiles: 'reports/tests/test/*',
+              reportName: "Test Report"
+            ])
     }
 }
