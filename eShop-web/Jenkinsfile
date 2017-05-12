@@ -1,0 +1,8 @@
+#!/usr/bin/env groovy
+node {
+    timestamps {
+        stage 'Build'
+        checkout scm
+        sh "gradle clean build"
+    }
+}
