@@ -4,6 +4,10 @@ package com.tw.eshop.order.vo;
  * Created by qbhuang on 16/8/17.
  */
 public class HttpResponse<T> {
+    private Integer resultCode;
+    private String message;
+    private T data;
+
     public Integer getResultCode() {
         return resultCode;
     }
@@ -27,10 +31,4 @@ public class HttpResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
-
-    private Integer resultCode;
-    private String message;
-    private T data;
-
-
 }
