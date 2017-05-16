@@ -18,14 +18,10 @@ package com.tw.eshop.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"com.tw.eshop.order.model"})
-@EnableJpaRepositories(basePackages = {"com.tw.eshop.order.dao"})
 public class Application extends SpringBootServletInitializer {
 
     @Override
@@ -33,7 +29,7 @@ public class Application extends SpringBootServletInitializer {
         return application.sources(Application.class);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Application.class);
         app.run(args);
     }

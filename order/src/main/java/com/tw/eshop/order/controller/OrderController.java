@@ -58,9 +58,8 @@ public class OrderController {
     @RequestMapping(value = "order", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpResponse> deleteOrder(@RequestParam(name = "orderId") String orderId) {
         HttpResponse<String> result = new HttpResponse<>();
-        if (logger.isDebugEnabled()) {
-            logger.debug("Attempt to delete order, id = " + orderId);
-        }
+
+        logger.debug("Attempt to delete order, id %s", orderId);
 
         try {
             orderService.delete(orderId);

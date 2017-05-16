@@ -47,6 +47,7 @@ subprojects{ subProject ->
     apply plugin: 'spring-boot'
     apply plugin: 'war'
     apply plugin: "org.sonarqube"
+    apply plugin: 'jacoco'
 
     dependencies {
         compile("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -73,8 +74,16 @@ subprojects{ subProject ->
 
         compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.6")
         compile("javax.validation:validation-api:1.1.0.Final")
+        compile 'commons-io:commons-io:2.5'
 
         testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+            property "sonar.exclusions", "**/model/*, **/vo/*, **/dao/*, **/exception/*, **/Application.java"
+        }
     }
 }
 
