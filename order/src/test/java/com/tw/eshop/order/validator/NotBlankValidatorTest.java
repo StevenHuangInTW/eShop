@@ -1,4 +1,4 @@
-package com.tw.eshop.order;
+package com.tw.eshop.order.validator;
 
 import com.tw.eshop.order.validator.NotBlankValidator;
 import com.tw.eshop.order.validator.Validator;

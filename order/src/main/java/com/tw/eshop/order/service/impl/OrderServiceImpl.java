@@ -32,20 +32,24 @@ import java.util.Date;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-	@Autowired
-	private OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
-    @Autowired
     private Validator<Order> orderValidator;
 
-    @Autowired
-    private  Validator<String> notBlankValidator;
+    private Validator<String> notBlankValidator;
 
-	@Override
+    @Autowired
+    public OrderServiceImpl(OrderRepository orderRepository, Validator<Order> orderValidator, Validator<String> notBlankValidator) {
+        this.orderRepository = orderRepository;
+        this.orderValidator = orderValidator;
+        this.notBlankValidator = notBlankValidator;
+    }
+
+    @Override
     @Transactional
-	public void create(Order order) {
+    public void create(Order order) {
         ValidateResult validateResult = orderValidator.validate(order);
-		if(!validateResult.isValid()){
+        if (!validateResult.isValid()) {
             throw new InvalidDataException(validateResult.getMsg());
         }
 
@@ -54,19 +58,19 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
-	@Override
+    @Override
     @Transactional
     public void delete(String id) {
-    	ValidateResult validateResult = notBlankValidator.validate(id);
-	    if(!validateResult.isValid()){
+        ValidateResult validateResult = notBlankValidator.validate(id);
+        if (!validateResult.isValid()) {
             throw new InvalidDataException(validateResult.getMsg());
         }
 
         Order existsOrder = orderRepository.findOne(id);
-        if(existsOrder == null){
+        if (existsOrder == null) {
             throw new NotExistsOrderException("Invalid order id");
         }
 
-	    orderRepository.delete(existsOrder);
+        orderRepository.delete(existsOrder);
     }
 }

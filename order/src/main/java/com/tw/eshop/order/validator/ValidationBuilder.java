@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Component
 public class ValidationBuilder {
-    private  Logger logger = LoggerFactory.getLogger(ValidationBuilder.class);
+    private Logger logger = LoggerFactory.getLogger(ValidationBuilder.class);
 
     public String buildErrorMessage(BindingResult bindingResult) {
         StringBuilder builder = new StringBuilder();
@@ -30,7 +30,7 @@ public class ValidationBuilder {
                 builder.append(JsonUtility.convertToString(map, Map.class));
                 return builder.toString();
             } catch (IOException e) {
-                logger.error(e.getMessage(),e);
+                logger.error(e.getMessage(), e);
             }
         }
         return null;

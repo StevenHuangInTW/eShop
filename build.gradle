@@ -82,7 +82,7 @@ subprojects{ subProject ->
     sonarqube {
         properties {
             property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
-            property "sonar.exclusions", "**/model/*, **/vo/*, **/dao/*, **/exception/*, **/Application.java"
+            property "sonar.exclusions", "**/model/*, **/vo/*, **/dao/*, **/exception/*, **/Application.java, , **/JsonConvertException.java"
         }
     }
 }
