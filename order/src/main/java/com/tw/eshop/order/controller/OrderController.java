@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by qbhuang on 16/8/17.
@@ -30,6 +31,25 @@ public class OrderController {
 
     @Autowired
     private ValidationBuilder validationBuilder;
+
+    @RequestMapping(value = "orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpResponse> orders() {
+        HttpResponse<List<Order>> result = new HttpResponse<>();
+        logger.debug("Attempt to get orders");
+        try {
+            List<Order> orders =orderService.getAll();
+            result.setData(orders);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (InvalidDataException e) {
+            result.setMessage(e.getMessage());
+            logger.warn(e.getMessage(), e);
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            result.setMessage(e.getMessage());
+            logger.warn(e.getMessage(), e);
+            return new ResponseEntity<>(result, HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
 
     @RequestMapping(value = "order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpResponse> newOrder(@RequestBody @Valid Order orderEntity, BindingResult bindingResult) {

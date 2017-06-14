@@ -27,7 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -72,5 +74,13 @@ public class OrderServiceImpl implements OrderService {
         }
 
         orderRepository.delete(existsOrder);
+    }
+
+    @Override
+    public List<Order> getAll() {
+        Iterable<Order> orderIterable = orderRepository.findAll();
+        List<Order> orders = new ArrayList<>();
+        orderIterable.forEach(orders::add);
+        return orders;
     }
 }
